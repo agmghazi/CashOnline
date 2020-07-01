@@ -26,17 +26,31 @@ namespace CashOnline.Models.Dao
             return DbContext.Users
                 .SingleOrDefault(x => x.UserName == userName);
         }
-        public static bool Login(string userName, string passWord)
+        public static int Login(string userName, string passWord)
         {
             var result = DbContext.Users
-                .Count(x => x.UserName == userName && x.Password == passWord);
-            if (result > 0)
+                .SingleOrDefault(x => x.UserName == userName);
+            if (result == null)
             {
-                return true; ;
+                return 0;
             }
             else
             {
-                return false;
+                if (result.Status == false)
+                {
+                    return -1;
+                }
+                else
+                {
+                    if (result.Password == passWord)
+                    {
+                        return 1;
+                    }
+                    else
+                    {
+                        return -2;
+                    }
+                }
             }
 
         }

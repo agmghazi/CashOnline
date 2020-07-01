@@ -34,7 +34,7 @@
                 <p class="login-box-msg">قم بتسجيل كمدير للموقع</p>
                 @using (Html.BeginForm("Login", "Login", FormMethod.Post))
                 {
-                    @Html.ValidationSummary(false, "", "error")
+                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
                     <div class="input-group mb-3">
                         @*<input type="email" class="form-control" placeholder="البريد الالكترونى">*@
                         @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", autofocus = "autofocus", placeholder = "البريد الالكترونى" })
@@ -57,8 +57,8 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="icheck-primary">
-                                @*<input type="checkbox" id="remember">*@
-                                @Html.CheckBoxFor(x => x.RememberMe)
+                                <input type="checkbox" id="remember">
+                                @Html.CheckBoxFor(x => x.RememberMe, new { @checked = "" })
                                 <label for="remember">
                                     تذكرنى
                                 </label>

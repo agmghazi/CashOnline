@@ -37,7 +37,7 @@ namespace CashOnline.Web.Areas.Admin.Controllers
         //this code for create custom session
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            UserLogin session = Session[CommonConstants.CurrentCulture] as UserLogin;
+            var session = (UserLogin)Session[CommonConstants.CurrentCulture] as UserLogin;
             if (session == null)
             {
                 filterContext.Result = new RedirectToRouteResult(new
