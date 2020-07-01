@@ -1,4 +1,4 @@
-﻿
+﻿@model CashOnline.Web.Areas.Admin.Models.LoginModel
 @{
     Layout = null;
 }
@@ -32,10 +32,12 @@
         <div class="card">
             <div class="card-body login-card-body">
                 <p class="login-box-msg">قم بتسجيل كمدير للموقع</p>
-
-                <form action="../../index3.html" method="post">
+                @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+                {
+                    @Html.ValidationSummary(false, "", "error")
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="البريد الالكترونى">
+                        @*<input type="email" class="form-control" placeholder="البريد الالكترونى">*@
+                        @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", autofocus = "autofocus", placeholder = "البريد الالكترونى" })
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -43,7 +45,9 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="كلمه المرور">
+                        @*<input type="password" class="form-control" placeholder="كلمه المرور">*@
+                        @Html.PasswordFor(x => x.PassWord, new { @class = "form-control", placeholder = "كلمه المرور" })
+
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -53,7 +57,8 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="icheck-primary">
-                                <input type="checkbox" id="remember">
+                                @*<input type="checkbox" id="remember">*@
+                                @Html.CheckBoxFor(x => x.RememberMe)
                                 <label for="remember">
                                     تذكرنى
                                 </label>
@@ -65,7 +70,7 @@
                         </div>
                         <!-- /.col -->
                     </div>
-                </form>
+                }
 
                 <div class="social-auth-links text-center mb-3">
                     <p>- أو -</p>

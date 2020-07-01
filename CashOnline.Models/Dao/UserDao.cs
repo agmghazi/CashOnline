@@ -4,26 +4,31 @@ using System.Linq;
 namespace CashOnline.Models.Dao
 {
 
-    public class UserDao
+    public static class UserDao
     {
-        private readonly CashOnlineDbContext _dbContext = null;
+        private static readonly CashOnlineDbContext DbContext = null;
 
-        public UserDao()
+        static UserDao()
         {
-            _dbContext = new CashOnlineDbContext();
+            DbContext = new CashOnlineDbContext();
         }
 
 
-        public long Insert(User entity)
+        public static long Insert(User entity)
         {
-            _dbContext.Users.Add(entity);
-            _dbContext.SaveChanges();
+            DbContext.Users.Add(entity);
+            DbContext.SaveChanges();
             return entity.ID;
         }
 
-        public bool Login(string userName, string passWord)
+        public static User GetById(string userName)
         {
-            var result = _dbContext.Users
+            return DbContext.Users
+                .SingleOrDefault(x => x.UserName == userName);
+        }
+        public static bool Login(string userName, string passWord)
+        {
+            var result = DbContext.Users
                 .Count(x => x.UserName == userName && x.Password == passWord);
             if (result > 0)
             {
